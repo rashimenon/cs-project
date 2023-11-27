@@ -122,7 +122,7 @@ def main_screen():
                 music_control.play_song()
             
         if game_start.draw(screen):
-            snake_game.game(screen)
+            snake_game.game()
 
 
         '''if next.draw(screen) == True:

@@ -1,20 +1,15 @@
 import pygame
 from pygame.locals import *
-import random, button, main
+import random, main
 
-def game(screen):
+def game():
 
     pygame.init()
-
     screen2_width = 600
     screen2_height = 600
-
     screen2 = pygame.display.set_mode((screen2_width, screen2_height))
     pygame.display.set_caption('Snake')
-
-    end_game_surface = pygame.image.load('assets/backgame.png').convert_alpha()
-    end_game = button.Button(300,300, end_game_surface, 0.05)
-
+    start_ticks=pygame.time.get_ticks()
     cell_size = 10
     direction = 1 # 1-up, 2-down, 3-right, 4-left
     update_snake = 0
@@ -38,10 +33,10 @@ def game(screen):
     food_col = (200,50,50)
 
     again_rect = Rect(screen2_width // 2 -80, screen2_height // 2, 160, 50)
+    over_rect = Rect((screen2_width // 2 - 80, screen2_height // 2 -60, 160, 50))
 
     def draw_screen2():
         screen2.fill(bg)
-
 
     def draw_score():
         score_txt = 'Score:' + str(score)
@@ -62,7 +57,7 @@ def game(screen):
     def draw_game_over():
         over_txt = 'Game Over'
         over_img = font.render(over_txt, True, (0,0,0))
-        pygame.draw.rect(screen2, (170,74,68), (screen2_width // 2 - 80, screen2_height // 2 -60, 160, 50))
+        pygame.draw.rect(screen2, (170,74,68), over_rect)
         screen2.blit(over_img, (screen2_width // 2 -80, screen2_height // 2 -50))
 
 
@@ -73,11 +68,13 @@ def game(screen):
 
     run = True
     while run:
-        if end_game.draw(screen) == True:
-            pygame.quit()
 
         draw_screen2()
         draw_score()
+
+        seconds=(pygame.time.get_ticks()-start_ticks)/1000
+        if seconds>10: # if more than 10 seconds close the game
+            return main.main_screen()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -141,6 +138,8 @@ def game(screen):
             if event.type == pygame.MOUSEBUTTONUP and clicked == True:
                 clicked = False
                 pos = pygame.mouse.get_pos()
+                if over_rect.collidepoint(pos):
+                   return main.main_screen()
                 if again_rect.collidepoint(pos):
                     direction = 1 # 1-up, 2-down, 3-right, 4-left
                     update_snake = 0
@@ -149,6 +148,8 @@ def game(screen):
                     new_piece = [0,0]
                     score = 0
                     game_over = False
+                
+                
 
 
                     snake_pos = [[int(screen2_width/2),int(screen2_height/2)]]
@@ -165,7 +166,6 @@ def game(screen):
                 pygame.draw.rect(screen2,body_outer,(x[0],x[1],cell_size,cell_size))
                 pygame.draw.rect(screen2,(170,74,68),(x[0]+1,x[1]+1,cell_size-2,cell_size-2))
                 head = 0
-        end_game.draw(screen)
         pygame.display.update()
 
         update_snake +=1
