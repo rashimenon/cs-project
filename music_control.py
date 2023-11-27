@@ -21,14 +21,14 @@ def mouse_clicks1(event):
                 print(MouseClicks)
                 # to move to next song in queue
                 next_song = MouseClicks
-                if next_song == len(songs):
+                if next_song >= len(songs):
+                    MouseClicks = 0
                     next_song = 0
-                    next_song+=1
                 pygame.mixer.music.load(songs[next_song])
                 pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
                 MouseClicks+=1
-     else:
+     '''else:
            if event.button == 1:
                 print(MouseClicks)
                 # to move to prev song in queue
@@ -41,6 +41,6 @@ def mouse_clicks1(event):
                 pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
                 prev_song-=1
-                MouseClicks-=1
+                MouseClicks-=1'''
           
 

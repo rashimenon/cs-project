@@ -12,9 +12,8 @@ def main_screen():
     screen = pygame.display.set_mode((960 , 540), pygame.RESIZABLE)
     pygame.display.set_caption('Virtual Villa')
 
-    clock = pygame.time.Clock()
 
-    WHITE_BUTTON = pygame.image.load("assets/start.png")
+    
     songs = []
 
     for song in os.listdir(r"C:\Users\rashi\Desktop\cs project\main\audios"):
@@ -52,7 +51,6 @@ def main_screen():
 
     game_start_surface = pygame.image.load('assets/gamestart.png').convert_alpha()
     game_start = button.Button(714, 447, game_start_surface, 0.1)
-
 
 
     start_surface = pygame.image.load('assets/start_game.png').convert_alpha()
@@ -124,6 +122,8 @@ def main_screen():
         if game_start.draw(screen):
             snake_game.game()
 
+        if next.draw(screen):
+            music_control.mouse_clicks1(event)
 
         '''if next.draw(screen) == True:
             music_control.mouse_clicks1(event)
