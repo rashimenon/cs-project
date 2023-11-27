@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
-import random
+import random, button, main
 
-def game():
+def game(screen):
 
     pygame.init()
 
@@ -11,6 +11,9 @@ def game():
 
     screen2 = pygame.display.set_mode((screen2_width, screen2_height))
     pygame.display.set_caption('Snake')
+
+    end_game_surface = pygame.image.load('assets/backgame.png').convert_alpha()
+    end_game = button.Button(300,300, end_game_surface, 0.05)
 
     cell_size = 10
     direction = 1 # 1-up, 2-down, 3-right, 4-left
@@ -70,6 +73,8 @@ def game():
 
     run = True
     while run:
+        if end_game.draw(screen) == True:
+            pygame.quit()
 
         draw_screen2()
         draw_score()
@@ -160,6 +165,7 @@ def game():
                 pygame.draw.rect(screen2,body_outer,(x[0],x[1],cell_size,cell_size))
                 pygame.draw.rect(screen2,(170,74,68),(x[0]+1,x[1]+1,cell_size-2,cell_size-2))
                 head = 0
+        end_game.draw(screen)
         pygame.display.update()
 
         update_snake +=1
