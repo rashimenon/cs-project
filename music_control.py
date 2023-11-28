@@ -13,10 +13,11 @@ def pause_song():
     pygame.mixer.music.pause()
 
 # to register number of clicks
+
 MouseClicks = 1
 def mouse_clicks1(event):
-     global MouseClicks
-     if MouseClicks:
+    global MouseClicks
+    if MouseClicks:
             if event.button == 1:
                 print(MouseClicks)
                 # to move to next song in queue
@@ -24,11 +25,28 @@ def mouse_clicks1(event):
                 if next_song >= len(songs):
                     MouseClicks = 0
                     next_song = 0
+                    
                 pygame.mixer.music.load(songs[next_song])
                 pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
                 MouseClicks+=1
-     '''else:
+
+def mouseclicks2(event):
+    global MouseClicks
+    if MouseClicks:
+            if event.button == 1:
+                print(MouseClicks)
+                prev_song = MouseClicks-1
+                # to move to prev song in queue
+                if prev_song <= -(len(songs)):
+                  back = 0
+                  prev_song = back
+                pygame.mixer.music.load(songs[prev_song])
+                pygame.mixer.music.set_volume(0.7)
+                pygame.mixer.music.play()
+                MouseClicks-=1
+
+'''else:
            if event.button == 1:
                 print(MouseClicks)
                 # to move to prev song in queue

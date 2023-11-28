@@ -1,5 +1,4 @@
 
-
 import pygame
 import sys, os
 from pygame import mixer
@@ -114,9 +113,8 @@ def main_screen():
             pause = pause_surface = pygame.image.load('assets/play.png').convert_alpha()
             pause = button.Button(472,453, pause_surface, 0.08)
         else: 
-            pause = pause_surface = pygame.image.load('assets/pause.png').convert_alpha()
-            pause = button.Button(472,453, pause_surface, 0.05)
-            if pause.draw(screen) == True:
+         
+            if play.draw(screen) == True:
                 music_control.play_song()
             
         if game_start.draw(screen):
@@ -125,7 +123,10 @@ def main_screen():
         if next.draw(screen):
             music_control.mouse_clicks1(event)
 
-        '''if next.draw(screen) == True:
+        if back.draw(screen):
+            music_control.mouseclicks2(event)
+            '''
+        if next.draw(screen) == True:
             music_control.mouse_clicks1(event)
     
         if back.draw(screen):
