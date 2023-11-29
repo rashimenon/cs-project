@@ -12,8 +12,8 @@ pygame.display.set_caption('Virtual Villa')
 screen.fill((134, 175, 240))
 
 #texts to be displayed
-heading_font = pygame.font.SysFont('timesnewroman',44,bold=True)
-text_font=pygame.font.SysFont('timesnewroman',28)
+heading_font = pygame.font.SysFont('centaur',44,bold=True)
+text_font=pygame.font.SysFont('centaur',28)
 welc_text=heading_font.render('Welcome to',True,(3, 15, 135))
 welc_text2=heading_font.render('VIRTUAL VILLA',True,(1, 10, 89))
 intro_text=text_font.render('Ready to start? Add your first task and',True,(3, 15, 135))
@@ -22,7 +22,7 @@ ques_text=text_font.render('What do you want to focus on today?',True,(1, 10, 89
 
 #start button
 start_surface=pygame.image.load('assets/start_task.png').convert_alpha()
-start_task=button.Button(293,384,start_surface,0.25)
+start_task=button.Button(330,384,start_surface,0.10)
 
 #text input box
 user_ip = ''

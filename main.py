@@ -29,7 +29,8 @@ def main_screen():
     screen.blit(bg,(0,0))
 
     text_font = pygame.font.SysFont('Centaur',20,)
-    timer_text = text_font.render("25:00", True, "white")
+    timer_font = pygame.font.SysFont('timesnewroman', 48, True)
+    timer_text = timer_font.render("25:00", True, "white")
     timer_text_rect = timer_text.get_rect(center=(width/2, height/2))
 
     def draw_text(text,font,text_col,x,y):
@@ -43,35 +44,34 @@ def main_screen():
     next_surface = pygame.image.load('assets/next.png').convert_alpha()
     back_surface = pygame.image.load('assets/back.png').convert_alpha()
 
-    play = button.Button(472,453, play_surface, 0.1)
-    pause = button.Button(472,453, pause_surface, 0.05)
+    play = button.Button(472,430, play_surface, 0.1)
+    pause = button.Button(472,465, pause_surface, 0.05)
     next = button.Button(519, 453, next_surface, 0.05)
     back = button.Button(433, 453, back_surface, 0.05)
 
     game_start_surface = pygame.image.load('assets/gamestart.png').convert_alpha()
-    game_start = button.Button(714, 447, game_start_surface, 0.1)
-
+    game_start = button.Button(750, 455, game_start_surface, 0.1)
 
     start_surface = pygame.image.load('assets/start_game.png').convert_alpha()
-    start_timer = button.Button(90,400, start_surface, 0.05)
+    start_timer = button.Button(90,450, start_surface, 0.05)
 
     short_break_surface = pygame.image.load('assets/shortbreak.png').convert_alpha()
     long_break_surface = pygame.image.load('assets/longbreak.png').convert_alpha()
 
-    short_break = button.Button(225,400, short_break_surface, 0.05)
-    long_break = button.Button(50,400, long_break_surface, 0.08)
+    short_break = button.Button(225,450, short_break_surface, 0.05)
+    long_break = button.Button(50,450, long_break_surface, 0.08)
 
-    pomodoro_surface = pygame.image.load('assets/pomodoro.jpg').convert_alpha()
-    pomodoro = button.Button(150,400, pomodoro_surface, 0.08)
+    pomodoro_surface = pygame.image.load('assets/pomodoro.png').convert_alpha()
+    pomodoro = button.Button(150,450, pomodoro_surface, 0.08)
 
-    pomodoro_length = 1500 # 1500 secs / 25 mins
-    short_break_length = 300 # 300 secs / 5 mins
-    long_break_length = 900 # 900 secs / 15 mins
+    pomodoro_length = 1500 #25 mins
+    short_break_length = 300 #5 mins
+    long_break_length = 900 # 15 mins
 
     current_seconds = pomodoro_length
     pygame.time.set_timer(pygame.USEREVENT, 1000)
     started = False
-    played = False; pau = False
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -89,6 +89,7 @@ def main_screen():
                 current_seconds = short_break_length
                 started = False
         if long_break.draw(screen) == True:
+
                 current_seconds = long_break_length
                 started = False
         if pomodoro.draw(screen):
@@ -108,13 +109,8 @@ def main_screen():
                 music_control.pause_song()   '''
         if pause.draw(screen):
             music_control.pause_song()
-            played = True   
-        if played:
-            pause = pause_surface = pygame.image.load('assets/play.png').convert_alpha()
-            pause = button.Button(472,453, pause_surface, 0.08)
-        else: 
-         
-            if play.draw(screen) == True:
+            
+        if play.draw(screen) == True:
                 music_control.play_song()
             
         if game_start.draw(screen):
@@ -141,11 +137,10 @@ def main_screen():
             display_seconds = current_seconds % 60
             display_minutes = int(current_seconds / 60) % 60
 
-        timer_text = text_font.render(f"{display_minutes:02}:{display_seconds:02}", True, "white")
+        timer_text = timer_font.render(f"{display_minutes:02}:{display_seconds:02}", True, "white")
         screen.blit( timer_text,timer_text_rect)
-        draw_text('mini-game',text_font,(200,235,255),485,356)
-        draw_text('music',text_font,(200,235,255),570,535)
-        draw_text('timer',text_font,(200,235,255),27,356)
-
+        draw_text('mini-game',text_font,(200,235,255),750,411)
+        draw_text('timer',text_font,(200,235,255),27,411)
+        draw_text('music control', text_font, (200,235,250),425, 411 )
         pygame.display.update()
 

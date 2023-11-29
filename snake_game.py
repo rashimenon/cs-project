@@ -73,7 +73,7 @@ def game():
         draw_score()
 
         seconds=(pygame.time.get_ticks()-start_ticks)/1000
-        if seconds>10: # if more than 10 seconds close the game
+        if seconds>10: # if more than 15 mins close the game
             return main.main_screen()
 
         for event in pygame.event.get():

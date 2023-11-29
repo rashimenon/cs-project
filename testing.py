@@ -81,6 +81,12 @@ while True:
         mouse_clicks()
     if game_start.draw(screen) == True:
         game_window.game(screen)
+        played = True   
+    if played:
+            pause = pause_surface = pygame.image.load('assets/play.png').convert_alpha()
+            pause = button.Button(472,453, pause_surface, 0.08)
+    
+         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
